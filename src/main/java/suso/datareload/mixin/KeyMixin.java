@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Mixin(Keyboard.class)
 public class KeyMixin {
-    @Inject(at = @At("RETURN"), method = "processF3")
+    @Inject(at = @At("RETURN"), method = "processF3", cancellable = true)
     public void inputReload(int key, CallbackInfoReturnable<Boolean> cir) {
         switch (key) {
 
@@ -28,6 +28,7 @@ public class KeyMixin {
             case 'Y':
                 MinecraftClient client = MinecraftClient.getInstance();
                 Objects.requireNonNull(client.getNetworkHandler()).sendPacket(new ChatMessageC2SPacket("/reload"));
+                cir.setReturnValue(true);
 
         }
     }
