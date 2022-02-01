@@ -33,7 +33,7 @@ public class RecipeMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void error(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo ci, Map<RecipeType<?>, ImmutableMap.Builder<Identifier, Recipe<?>>> map2, ImmutableMap.Builder<Identifier, Recipe<?>> builder, Iterator<Map<Identifier, JsonElement>> var5, Map.Entry<Identifier, JsonElement> entry, Identifier identifier, RuntimeException var9) {
+    public void error(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo ci, Map<RecipeType<?>, ImmutableMap.Builder<Identifier, Recipe<?>>> map2, Iterator<Map<Identifier, JsonElement>> var5, Map.Entry<Identifier, JsonElement> entry, Identifier identifier, RuntimeException var9) {
         Text t = new LiteralText("\n")
                 .append(new LiteralText("- Parsing error loading recipe ").formatted(Formatting.RED))
                 .append(new LiteralText(identifier.toString()).formatted(Formatting.AQUA))

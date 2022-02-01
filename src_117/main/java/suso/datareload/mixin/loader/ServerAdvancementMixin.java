@@ -26,7 +26,7 @@ public class ServerAdvancementMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void error(Map<Identifier, JsonElement> map, Identifier id, JsonElement json, CallbackInfo ci, Exception var6) {
+    public void error(Map<Identifier, JsonElement> map, Identifier id, JsonElement json, CallbackInfo ci, RuntimeException var6) {
         Text t = new LiteralText("\n")
                 .append(new LiteralText("- Parsing error loading custom advancement ").formatted(Formatting.RED))
                 .append(new LiteralText(id.toString()).formatted(Formatting.AQUA))

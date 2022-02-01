@@ -31,7 +31,7 @@ public class ResourcePackMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void error(File file, int maxDepth, String namespace, List<Identifier> found, String prefix, Predicate<String> pathFilter, CallbackInfo ci, File[] files, File[] var8, int var9, int var10, File idk, InvalidIdentifierException var13) {
+    public void error(File file, int maxDepth, String namespace, List<Identifier> found, String prefix, Predicate<String> pathFilter, CallbackInfo ci, File[] files, File[] var8, int var9, int var10, InvalidIdentifierException var13) {
         String[] split = var13.getMessage().split(":", 2);
 
         Text t = new LiteralText("\n")
