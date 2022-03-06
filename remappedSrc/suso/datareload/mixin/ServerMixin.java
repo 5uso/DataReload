@@ -6,7 +6,6 @@ import com.mojang.datafixers.DataFixer;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.DataPackContents;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.SaveLoader;
 import net.minecraft.server.WorldGenerationProgressListenerFactory;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.UserCache;
@@ -28,7 +27,7 @@ public abstract class ServerMixin {
     @Shadow public abstract ServerCommandSource getCommandSource();
 
     @Inject(at = @At("RETURN"), method = "<init>")
-    public void getServer(Thread serverThread, LevelStorage.Session session, ResourcePackManager dataPackManager, SaveLoader saveLoader, Proxy proxy, DataFixer dataFixer, @Nullable MinecraftSessionService sessionService, @Nullable GameProfileRepository gameProfileRepo, @Nullable UserCache userCache, WorldGenerationProgressListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
+    public void getServer(Thread serverThread, DynamicRegistryManager.Impl registryManager, LevelStorage.Session session, SaveProperties saveProperties, ResourcePackManager dataPackManager, Proxy proxy, DataFixer dataFixer, DataPackContents serverResourceManager, @Nullable MinecraftSessionService sessionService, @Nullable GameProfileRepository gameProfileRepo, @Nullable UserCache userCache, WorldGenerationProgressListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
         Utility.server = this.getCommandSource().getServer();
         System.out.println("[Data Reload] Got server: " + Utility.server.getClass().getSimpleName());
     }

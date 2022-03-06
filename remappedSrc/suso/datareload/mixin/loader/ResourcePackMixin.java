@@ -1,5 +1,8 @@
 package suso.datareload.mixin.loader;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.gson.JsonElement;
+import net.minecraft.loot.LootTable;
 import net.minecraft.resource.DirectoryResourcePack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -23,7 +26,7 @@ public class ResourcePackMixin {
             method = "findFiles",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;)V",
+                    target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;)V",
                     remap = false
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT

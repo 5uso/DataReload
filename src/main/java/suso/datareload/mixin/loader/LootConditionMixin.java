@@ -21,7 +21,7 @@ public class LootConditionMixin {
             method = "method_22560",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
                     remap = false
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT

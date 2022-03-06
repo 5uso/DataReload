@@ -32,7 +32,7 @@ public class TagGroupMixin {
             method = "loadTags",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;[Ljava/lang/Object;)V",
+                    target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V",
                     remap = false,
                     ordinal = 0
             ),
@@ -54,9 +54,8 @@ public class TagGroupMixin {
             method = "loadTags",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;[Ljava/lang/Object;)V",
-                    remap = false,
-                    ordinal = 1
+                    target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V",
+                    remap = false
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
@@ -77,13 +76,13 @@ public class TagGroupMixin {
             method = "loadTags",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;[Ljava/lang/Object;)V",
+                    target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V",
                     remap = false,
                     ordinal = 1
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void otherError(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, Tag.Builder>> cir, Map<Identifier, Tag.Builder> map, Iterator<Identifier> var3, Identifier identifier, String string, Identifier identifier2, Iterator<Resource> var7, Resource resource, Exception exception) {
+    public void otherError(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, Tag.Builder>> cir, Map<Identifier, Tag.Builder> map, Iterator<Identifier> var3, Identifier identifier, String string, Identifier identifier2, IOException var27) {
         Text t = new LiteralText("\n")
                 .append(new LiteralText("- Couldn't read tag list ").formatted(Formatting.RED))
                 .append(new LiteralText(identifier2.toString()).formatted(Formatting.AQUA))
@@ -96,7 +95,7 @@ public class TagGroupMixin {
             method = "method_33175",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+                    target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
                     remap = false
             )
     )

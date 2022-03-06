@@ -28,7 +28,7 @@ public class RecipeMixin {
             method = "apply",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+                    target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
                     remap = false
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT

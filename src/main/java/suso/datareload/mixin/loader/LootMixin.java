@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import net.minecraft.loot.LootManager;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -22,7 +21,7 @@ public class LootMixin {
             method = "method_20711",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
+                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
                     remap = false
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
