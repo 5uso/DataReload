@@ -2,12 +2,12 @@ package suso.datareload.mixin.loader;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
-import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -34,11 +34,11 @@ public class RecipeMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     public void error(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo ci, Map<RecipeType<?>, ImmutableMap.Builder<Identifier, Recipe<?>>> map2, ImmutableMap.Builder<Identifier, Recipe<?>> builder, Iterator<Map<Identifier, JsonElement>> var5, Map.Entry<Identifier, JsonElement> entry, Identifier identifier, RuntimeException var9) {
-        Text t = new LiteralText("\n")
-                .append(new LiteralText("- Parsing error loading recipe ").formatted(Formatting.RED))
-                .append(new LiteralText(identifier.toString()).formatted(Formatting.AQUA))
-                .append(new LiteralText("\n "))
-                .append(new LiteralText(var9.getMessage()));
+        Text t = MutableText.of(new LiteralTextContent("\n"))
+                .append(Utility.strToText("- Parsing error loading recipe ", Formatting.RED))
+                .append(Utility.strToText(identifier.toString(), Formatting.AQUA))
+                .append(Utility.strToText("\n "))
+                .append(Utility.strToText(var9.getMessage()));
         Utility.sendMessage(t);
     }
 }

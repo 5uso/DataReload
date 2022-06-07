@@ -4,7 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import net.minecraft.loot.function.LootFunction;
 import net.minecraft.loot.function.LootFunctionManager;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -27,11 +28,11 @@ public class LootFunctionMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     private static void error(ImmutableMap.Builder<Identifier, LootFunction> builder, Identifier id, JsonElement json, CallbackInfo ci, Exception var4) {
-        Text t = new LiteralText("\n")
-                .append(new LiteralText("- Couldn't parse item modifier ").formatted(Formatting.RED))
-                .append(new LiteralText(id.toString()).formatted(Formatting.AQUA))
-                .append(new LiteralText("\n "))
-                .append(new LiteralText(var4.getMessage()));
+        Text t = MutableText.of(new LiteralTextContent("\n"))
+                .append(Utility.strToText("- Couldn't parse item modifier ", Formatting.RED))
+                .append(Utility.strToText(id.toString(), Formatting.AQUA))
+                .append(Utility.strToText("\n "))
+                .append(Utility.strToText(var4.getMessage()));
         Utility.sendMessage(t);
     }
 }

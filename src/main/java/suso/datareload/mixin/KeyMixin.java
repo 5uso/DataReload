@@ -2,10 +2,8 @@ package suso.datareload.mixin;
 
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.ShaderParseException;
-import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
-import net.minecraft.text.LiteralText;
-import net.minecraft.util.Formatting;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,14 +18,12 @@ public class KeyMixin {
         switch (key) {
 
             case 'Q':
-                MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(
-                        new LiteralText("F3 + Y = Reload datapacks ")
-                                .append(new LiteralText("[Fabric mod by Suso]").formatted(Formatting.AQUA)));
+                MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(MutableText.of(new LiteralTextContent("F3 + Y = Reload datapacks")));
                 return;
 
             case 'Y':
                 MinecraftClient client = MinecraftClient.getInstance();
-                Objects.requireNonNull(client.getNetworkHandler()).sendPacket(new ChatMessageC2SPacket("/reload"));
+                Objects.requireNonNull(client.player).sendCommand("reload", MutableText.of(new LiteralTextContent("")));
                 cir.setReturnValue(true);
 
         }

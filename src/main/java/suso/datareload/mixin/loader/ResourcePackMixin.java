@@ -1,7 +1,8 @@
 package suso.datareload.mixin.loader;
 
 import net.minecraft.resource.DirectoryResourcePack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -28,12 +29,12 @@ public class ResourcePackMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void error(File file, int maxDepth, String namespace, List<Identifier> found, String prefix, Predicate<String> pathFilter, CallbackInfo ci, File[] files, File[] var8, int var9, int var10, File idk, InvalidIdentifierException var13) {
+    public void error(File file, String namespace, List<Identifier> found, String prefix, Predicate<String> pathFilter, CallbackInfo ci, File[] files, File[] var7, int var8, int var9, File file2, InvalidIdentifierException var13) {
         String[] split = var13.getMessage().split(":", 2);
 
-        Text t = new LiteralText("\n")
-                .append(new LiteralText("- " + split[0] + ":").formatted(Formatting.RED))
-                .append(new LiteralText(split[1]).formatted(Formatting.AQUA));
+        Text t = MutableText.of(new LiteralTextContent("\n"))
+                .append(Utility.strToText("- " + split[0] + ":", Formatting.RED))
+                .append(Utility.strToText(split[1], Formatting.AQUA));
         Utility.sendMessage(t);
     }
 }

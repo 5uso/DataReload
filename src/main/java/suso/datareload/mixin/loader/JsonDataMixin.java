@@ -4,7 +4,8 @@ import com.google.gson.JsonElement;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -16,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import suso.datareload.Utility;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Iterator;
@@ -32,14 +34,14 @@ public class JsonDataMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void parseError(ResourceManager resourceManager, Profiler profiler, CallbackInfoReturnable<Map<Identifier, JsonElement>> cir, Map<Identifier, JsonElement> map, int i, Iterator<Identifier> var5, Identifier identifier, String string, Identifier identifier2, Exception var20) {
-        Text t = new LiteralText("\n")
-                .append(new LiteralText("- Couldn't parse data file ").formatted(Formatting.RED))
-                .append(new LiteralText(identifier2.toString()).formatted(Formatting.AQUA))
-                .append(new LiteralText(" from ").formatted(Formatting.RED))
-                .append(new LiteralText(identifier.toString()).formatted(Formatting.YELLOW))
-                .append(new LiteralText("\n "))
-                .append(new LiteralText(Utility.removeEx(var20.getMessage())));
+    public void parseError(ResourceManager resourceManager, Profiler profiler, CallbackInfoReturnable<Map<Identifier, JsonElement>> cir, Map<Identifier, JsonElement> map, int i, Iterator<Identifier> var5, Map.Entry<Identifier, Resource> entry, Identifier identifier, String string, Identifier identifier2, Exception var15) {
+        Text t = MutableText.of(new LiteralTextContent("\n"))
+                .append(Utility.strToText("- Couldn't parse data file ", Formatting.RED))
+                .append(Utility.strToText(identifier2.toString(), Formatting.AQUA))
+                .append(Utility.strToText(" from ", Formatting.RED))
+                .append(Utility.strToText(identifier.toString(), Formatting.YELLOW))
+                .append(Utility.strToText("\n "))
+                .append(Utility.strToText(Utility.removeEx(var15.getMessage())));
         Utility.sendMessage(t);
     }
 
@@ -52,13 +54,13 @@ public class JsonDataMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void emptyError(ResourceManager resourceManager, Profiler profiler, CallbackInfoReturnable<Map<Identifier, JsonElement>> cir, Map<Identifier, JsonElement> map, int i, Iterator<Identifier> var5, Identifier identifier, String string, Identifier identifier2, Resource resource, InputStream inputStream, Reader reader) {
-        Text t = new LiteralText("\n")
-                .append(new LiteralText("- Couldn't load data file ").formatted(Formatting.RED))
-                .append(new LiteralText(identifier2.toString()).formatted(Formatting.AQUA))
-                .append(new LiteralText(" from ").formatted(Formatting.RED))
-                .append(new LiteralText(identifier.toString()).formatted(Formatting.YELLOW))
-                .append(new LiteralText(" as it's null or empty").formatted(Formatting.RED));
+    public void emptyError(ResourceManager resourceManager, Profiler profiler, CallbackInfoReturnable<Map<Identifier, JsonElement>> cir, Map<Identifier, JsonElement> map, int i, Iterator<Identifier> var5, Map.Entry<Identifier, Resource> entry, Identifier identifier, String string, Identifier identifier2, Reader reader) {
+        Text t = MutableText.of(new LiteralTextContent("\n"))
+                .append(Utility.strToText("- Couldn't load data file ", Formatting.RED))
+                .append(Utility.strToText(identifier2.toString(), Formatting.AQUA))
+                .append(Utility.strToText(" from ", Formatting.RED))
+                .append(Utility.strToText(identifier.toString(), Formatting.YELLOW))
+                .append(Utility.strToText(" as it's null or empty", Formatting.RED));
         Utility.sendMessage(t);
     }
 }
