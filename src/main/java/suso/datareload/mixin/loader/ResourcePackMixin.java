@@ -1,6 +1,9 @@
 package suso.datareload.mixin.loader;
 
+import com.mojang.serialization.DataResult;
 import net.minecraft.resource.DirectoryResourcePack;
+import net.minecraft.resource.ResourcePack;
+import net.minecraft.resource.ResourceType;
 import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -21,20 +24,18 @@ import java.util.function.Predicate;
 @Mixin(DirectoryResourcePack.class)
 public class ResourcePackMixin {
     @Inject(
-            method = "findFiles",
+            method = "method_45182",
             at = @At(
                     value = "INVOKE",
-                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;)V",
+                    target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;Ljava/lang/Object;)V",
                     remap = false
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void error(File file, String namespace, List<Identifier> found, String prefix, Predicate<String> pathFilter, CallbackInfo ci, File[] files, File[] var7, int var8, int var9, File file2, InvalidIdentifierException var13) {
-        String[] split = var13.getMessage().split(":", 2);
-
+    private static void error(String prefix, DataResult.PartialResult<List<String>> result, CallbackInfo ci) {
         Text t = MutableText.of(new LiteralTextContent("\n"))
-                .append(Utility.strToText("- " + split[0] + ":", Formatting.RED))
-                .append(Utility.strToText(split[1], Formatting.AQUA));
+                .append(Utility.strToText("- Invalid path" + prefix + ":", Formatting.RED))
+                .append(Utility.strToText(result.message(), Formatting.AQUA));
         Utility.sendMessage(t);
     }
 }

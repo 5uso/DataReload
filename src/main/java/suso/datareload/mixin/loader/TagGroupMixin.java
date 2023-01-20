@@ -1,8 +1,9 @@
 package suso.datareload.mixin.loader;
 
+import net.minecraft.registry.tag.TagGroupLoader;
 import net.minecraft.resource.Resource;
+import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.tag.TagGroupLoader;
 import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -32,7 +33,7 @@ public class TagGroupMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    public void jsonError(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, List<TagGroupLoader.TrackedEntry>>> cir, Map<Identifier, List<TagGroupLoader.TrackedEntry>> map, Iterator<Identifier> var3, Map.Entry<Identifier, List<Resource>> entry, Identifier identifier, String string, Identifier identifier2, Iterator<Resource> var8, Resource resource, Exception var17) {
+    public void jsonError(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, List<TagGroupLoader.TrackedEntry>>> cir, Map<Identifier, List<TagGroupLoader.TrackedEntry>> map, ResourceFinder resourceFinder, Iterator<Map.Entry<Identifier, Resource>> var4, Map.Entry<Identifier, List<Resource>> entry, Identifier identifier, Identifier identifier2, Iterator<Resource> var8, Resource resource, Exception var17) {
         Text t = MutableText.of(new LiteralTextContent("\n"))
                 .append(Utility.strToText("- Couldn't read tag list ", Formatting.RED))
                 .append(Utility.strToText(identifier2.toString(), Formatting.AQUA))
