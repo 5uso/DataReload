@@ -7,8 +7,6 @@
     "ServerMixin",
     "loader.FunctionMixin",
     "loader.JsonDataMixin",
-    "loader.LootConditionMixin",
-    "loader.LootFunctionMixin",
     "loader.LootMixin",
     "loader.RecipeMixin",
     "loader.ResourcePackMixin",
