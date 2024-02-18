@@ -3,8 +3,6 @@ package suso.datareload.mixin.loader;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.server.function.CommandFunction;
 import net.minecraft.server.function.FunctionLoader;
-import net.minecraft.text.LiteralTextContent;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -25,8 +23,7 @@ public class FunctionMixin {
             )
     )
     private static void error(Identifier id, ImmutableMap.Builder<Identifier, CommandFunction> immBuilder, CommandFunction commandFunction, Throwable ex, CallbackInfoReturnable<Object> ci) {
-        Text t = MutableText.of(new LiteralTextContent("\n"))
-                .append(Utility.strToText("- Failed to load function ", Formatting.RED))
+        Text t = Utility.strToText("- Failed to load function ", Formatting.RED)
                 .append(Utility.strToText(id.toString(), Formatting.AQUA))
                 .append(Utility.strToText("\n "))
                 .append(Utility.strToText(Utility.removeEx(ex.getMessage())));

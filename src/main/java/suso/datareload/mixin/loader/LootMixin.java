@@ -1,8 +1,6 @@
 package suso.datareload.mixin.loader;
 
 import net.minecraft.loot.LootManager;
-import net.minecraft.text.LiteralTextContent;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,8 +20,7 @@ public class LootMixin {
             )
     )
     private static void error(String name, String message, CallbackInfo ci) {
-        Text t = MutableText.of(new LiteralTextContent("\n"))
-                .append(Utility.strToText("- Validation problem in loot table ", Formatting.RED))
+        Text t = Utility.strToText("- Validation problem in loot table ", Formatting.RED)
                 .append(Utility.strToText(name, Formatting.AQUA))
                 .append(Utility.strToText("\n "))
                 .append(Utility.strToText(message));
