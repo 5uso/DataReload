@@ -4,8 +4,6 @@ import net.minecraft.registry.tag.TagGroupLoader;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.text.LiteralTextContent;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -34,8 +32,7 @@ public class TagGroupMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     public void jsonError(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, List<TagGroupLoader.TrackedEntry>>> cir, Map<Identifier, List<TagGroupLoader.TrackedEntry>> map, ResourceFinder resourceFinder, Iterator<Map.Entry<Identifier, Resource>> var4, Map.Entry<Identifier, List<Resource>> entry, Identifier identifier, Identifier identifier2, Iterator<Resource> var8, Resource resource, Exception var17) {
-        Text t = MutableText.of(new LiteralTextContent("\n"))
-                .append(Utility.strToText("- Couldn't read tag list ", Formatting.RED))
+        Text t = Utility.strToText("- Couldn't read tag list ", Formatting.RED)
                 .append(Utility.strToText(identifier2.toString(), Formatting.AQUA))
                 .append(Utility.strToText(" from ", Formatting.RED))
                 .append(Utility.strToText(identifier.toString(), Formatting.YELLOW))
@@ -55,8 +52,7 @@ public class TagGroupMixin {
             )
     )
     private static void referenceError(Identifier id, Collection<Object> collection, CallbackInfo ci) {
-        Text t = MutableText.of(new LiteralTextContent("\n"))
-                .append(Utility.strToText("- Couldn't load tag ", Formatting.RED))
+        Text t = Utility.strToText("- Couldn't load tag ", Formatting.RED)
                 .append(Utility.strToText(id.toString(), Formatting.AQUA))
                 .append(Utility.strToText(" as it is missing following references: ", Formatting.RED))
                 .append(Utility.strToText(collection.stream().map(Objects::toString).collect(Collectors.joining(",")), Formatting.YELLOW));
