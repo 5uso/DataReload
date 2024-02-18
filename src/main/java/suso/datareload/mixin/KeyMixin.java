@@ -2,16 +2,13 @@ package suso.datareload.mixin;
 
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.LiteralTextContent;
-import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Objects;
 
 @Mixin(Keyboard.class)
 public class KeyMixin {
@@ -22,7 +19,7 @@ public class KeyMixin {
         switch (key) {
 
             case 'Q':
-                MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(MutableText.of(new LiteralTextContent("F3 + Y = Reload datapacks")));
+                MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(Text.literal("F3 + Y = Reload datapacks"));
                 return;
 
             case 'Y':
