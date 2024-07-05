@@ -1,10 +1,7 @@
 plugins {
-    id "fabric-loom" version "0.11-SNAPSHOT"
+    id "fabric-loom" version "1.6-SNAPSHOT"
     id 'maven-publish'
 }
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -29,10 +26,12 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-//Generate source jar
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
+tasks {
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+        withSourcesJar()
+    }
 }
 
 //You got a loicense for that m8
