@@ -7,7 +7,15 @@
   "authors": [
     "Suso"
   ],
-  "contact": {},
+  "contributors": [
+    "Caotenhoch2",
+    "Papierkorb2292"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/data-reload",
+    "sources": "https://github.com/5uso/DataReload",
+    "issues": "https://github.com/5uso/DataReload/issues"
+  },
   "license": "MIT",
   "icon": "assets/datareload/icon.png",
   "environment": "*",
