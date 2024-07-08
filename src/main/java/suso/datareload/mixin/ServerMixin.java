@@ -29,7 +29,7 @@ public abstract class ServerMixin {
 
     @Inject(at = @At("RETURN"), method = "<init>")
     public void getServer(Thread serverThread, LevelStorage.Session session, ResourcePackManager dataPackManager, SaveLoader saveLoader, Proxy proxy, DataFixer dataFixer, ApiServices apiServices, WorldGenerationProgressListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
-        Utility.server = this.getCommandSource().getServer();
+        Utility.server = (MinecraftServer)(Object)this;
         System.out.println("[Data Reload] Got server: " + Utility.server.getClass().getSimpleName());
     }
 }

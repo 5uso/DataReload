@@ -7,7 +7,15 @@
   "authors": [
     "Suso"
   ],
-  "contact": {},
+  "contributors": [
+    "Caotenhoch2",
+    "Papierkorb2292"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/data-reload",
+    "sources": "https://github.com/5uso/DataReload",
+    "issues": "https://github.com/5uso/DataReload/issues"
+  },
   "license": "MIT",
   "icon": "assets/datareload/icon.png",
   "environment": "*",
@@ -24,6 +32,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.13.0",
-    "minecraft": "~1.20"
+    "minecraft": "~1.21"
   }
 }

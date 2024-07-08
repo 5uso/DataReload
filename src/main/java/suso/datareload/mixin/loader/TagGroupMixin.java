@@ -2,19 +2,14 @@ package suso.datareload.mixin.loader;
 
 import net.minecraft.registry.tag.TagGroupLoader;
 import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceFinder;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.text.LiteralTextContent;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import suso.datareload.Utility;
 
 import java.util.*;
@@ -23,7 +18,7 @@ import java.util.stream.Collectors;
 @Mixin(TagGroupLoader.class)
 public class TagGroupMixin {
 
-    @Inject(
+    @ModifyArg(
             method = "loadTags",
             at = @At(
                     value = "INVOKE",
@@ -31,19 +26,24 @@ public class TagGroupMixin {
                     remap = false,
                     ordinal = 0
             ),
-            locals = LocalCapture.CAPTURE_FAILSOFT
+            index = 1
     )
-    public void jsonError(ResourceManager manager, CallbackInfoReturnable<Map<Identifier, List<TagGroupLoader.TrackedEntry>>> cir, Map<Identifier, List<TagGroupLoader.TrackedEntry>> map, ResourceFinder resourceFinder, Iterator<Map.Entry<Identifier, Resource>> var4, Map.Entry<Identifier, List<Resource>> entry, Identifier identifier, Identifier identifier2, Iterator<Resource> var8, Resource resource, Exception var17) {
-        Text t = MutableText.of(new LiteralTextContent("\n"))
+    public Object[] jsonError(Object[] args) {
+        Object identifier2 = args[0];
+        Object identifier = args[1];
+        String packId = (String)args[2];
+        Exception var17 = (Exception)args[3];
+        Text t = Text.literal("\n")
                 .append(Utility.strToText("- Couldn't read tag list ", Formatting.RED))
                 .append(Utility.strToText(identifier2.toString(), Formatting.AQUA))
                 .append(Utility.strToText(" from ", Formatting.RED))
                 .append(Utility.strToText(identifier.toString(), Formatting.YELLOW))
                 .append(Utility.strToText(" in data pack ", Formatting.RED))
-                .append(Utility.strToText(resource.getResourcePackName(), Formatting.YELLOW))
+                .append(Utility.strToText(packId, Formatting.YELLOW))
                 .append(Utility.strToText("\n "))
                 .append(Utility.strToText(Utility.removeEx(var17.getMessage())));
         Utility.sendMessage(t);
+        return args;
     }
 
     @Inject(
@@ -55,7 +55,7 @@ public class TagGroupMixin {
             )
     )
     private static void referenceError(Identifier id, Collection<Object> collection, CallbackInfo ci) {
-        Text t = MutableText.of(new LiteralTextContent("\n"))
+        Text t = Text.literal("\n")
                 .append(Utility.strToText("- Couldn't load tag ", Formatting.RED))
                 .append(Utility.strToText(id.toString(), Formatting.AQUA))
                 .append(Utility.strToText(" as it is missing following references: ", Formatting.RED))
