@@ -8,7 +8,6 @@
     "loader.FunctionMixin",
     "loader.JsonDataMixin",
     "loader.LootMixin",
-    "loader.RecipeMixin",
     "loader.ResourcePackMixin",
     "loader.ServerAdvancementMixin",
     "loader.TagGroupMixin"

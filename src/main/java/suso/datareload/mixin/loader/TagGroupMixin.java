@@ -54,7 +54,7 @@ public class TagGroupMixin {
                     remap = false
             )
     )
-    private static void referenceError(Identifier id, Collection<Object> collection, CallbackInfo ci) {
+    private static void referenceError(Identifier id, List<Object> collection, CallbackInfo ci) {
         Text t = Text.literal("\n")
                 .append(Utility.strToText("- Couldn't load tag ", Formatting.RED))
                 .append(Utility.strToText(id.toString(), Formatting.AQUA))
