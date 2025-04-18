@@ -21,7 +21,16 @@ public class Utility {
     }
 
     public static String removeEx(String msg) {
-        msg = msg.substring(msg.indexOf(": ") + 2);
+        while(true) {
+            final var colonIndex = msg.indexOf(": ");
+            if(colonIndex == -1)
+                break;
+            if(msg.substring(0, colonIndex).contains(" ")) {
+                // Definitely not an error name, so it shouldn't be removed
+                break;
+            }
+            msg = msg.substring(colonIndex + 2);
+        }
         msg = msg.replace("Use JsonReader.setLenient(true) to accept m", "M");
         return msg;
     }
